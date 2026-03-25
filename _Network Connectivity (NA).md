@@ -1546,6 +1546,7 @@ conf t
 ~~~
 !@R4
 conf t
+no router ospf 1
  router ospf 1
   router-id 4.4.4.4
   network 4.4.4.4 0.0.0.0 area 0
@@ -2471,22 +2472,22 @@ config t
 ~~~
 !@I2 - PLDT
 config t
- router bgp __
+ router bgp 2
  bgp log-neighbor-changes
- neighbor __.__.__.__ remote-as __
- neighbor __.__.__.__  remote-as __
- neighbor __.__.__.__  remote-as __
- neighbor __.__.__.__  remote-as __
- address-family __
-  neighbor __.__.__.__  ____
-  neighbor __.__.__.__  ____
-  neighbor __.__.__.__  ____
-  neighbor __.__.__.__  ____
-  network __.__.__.__ mask __.__.__.__
-  network __.__.__.__ mask __.__.__.__
-  network __.__.__.__ mask __.__.__.__
-  network __.__.__.__ mask __.__.__.__
-  network __.__.__.__ mask __.__.__.__
+ neighbor 24.2.4.4 remote-as 45
+ neighbor 32.3.2.3  remote-as 3
+ neighbor 207.7.7.1  remote-as 1
+ neighbor 25.2.5.5  remote-as 45
+ address-family ipv4
+  neighbor 25.2.5.5  activate
+  neighbor 32.3.2.3  activate
+  neighbor 24.2.4.4  activate
+  neighbor 207.7.7.1  activate
+  network 207.7.7.0 mask 255.255.255.0
+  network 22.22.22.22 mask 255.255.255.255
+  network 24.2.4.0 mask 255.255.255.0
+  network 25.2.5.0 mask 255.255.255.0
+  network 32.3.2.0 mask 255.255.255.0
   end
 ~~~
 
@@ -2740,7 +2741,7 @@ Remove Dynamic NAT
 !@R1
 clear ip nat trans *
 conf t
- ip nat pool NATPOOL 208.8.8.10 208.8.8.20 netmask 255.255.255.0
+ no ip nat pool NATPOOL 208.8.8.10 208.8.8.20 netmask 255.255.255.0
  no ip nat inside source list 1 pool NATPOOL
  end
 ~~~
